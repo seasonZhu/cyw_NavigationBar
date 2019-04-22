@@ -24,7 +24,7 @@
    
     
 //    [self setNeedsDisplay];
-    [self draw05];
+    [self draw04];
 }
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -41,21 +41,23 @@
 -(void)draw01{
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(200, 200, 200, 200)];
     [path setLineWidth:5];
-    [[UIColor redColor] setFill];
-    [[UIColor greenColor] setStroke];
+    [[UIColor redColor] setFill]; //  这个使用用来把内部颜色涂满的
+    [[UIColor greenColor] setStroke]; // 这个是用来绘制边框的
     [path fill];
     [path stroke];
 }
 
 -(void)draw02{
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(200, 200) radius:100 startAngle:0 endAngle:M_PI * 2 clockwise:YES];
+    [[UIColor grayColor] setFill];
     [path fill];
     
 }
 
--(void  )draw03{
+-(void)draw03{
     UIBezierPath *path = [UIBezierPath bezierPath];
     
+    //  贝塞尔曲线进行绘画的时候, 你可以这么想象 绘笔先到 100,100这个点 ,然后划线到 200, 300, 然后再从200, 300出发, 到300, 300 以此类推
     [path moveToPoint:CGPointMake(100, 100)];
     [path addLineToPoint:CGPointMake(200, 300)];
     [path addLineToPoint:CGPointMake(300, 300)];
@@ -63,8 +65,19 @@
     [path addLineToPoint:CGPointMake(100, 300)];
     
     [path setLineWidth:10];
-    [path setLineCapStyle:kCGLineCapRound];
-    [path setLineJoinStyle:kCGLineJoinRound];
+    /**
+     kCGLineCapButt, butt 笑柄；烟头；屁股；靶垛；粗大的一端的意思 但是感觉和Square很像
+     kCGLineCapRound, 圆角风格
+     kCGLineCapSquare 棱角风格
+     */
+    [path setLineCapStyle:kCGLineCapRound]; // 笔画的风格
+    
+    /**
+     kCGLineJoinMiter, 锐角
+     kCGLineJoinRound, 圆角
+     kCGLineJoinBevel, 平角
+     */
+    [path setLineJoinStyle:kCGLineJoinBevel]; // 笔画与笔画间的衔接的风格
     [path stroke];
     [path closePath];
 }
@@ -91,6 +104,7 @@
         [self.path addLineToPoint:point];
     }
     
+    //  动态绘制线的时候需要调用这个方法 这样线才会显示出来
     [self setNeedsDisplay];
 }
 

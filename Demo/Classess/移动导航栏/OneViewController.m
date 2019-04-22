@@ -67,11 +67,11 @@
     if (section == 0) {
         return 200;
     }
-    return 44;
+    return 88;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 88)];
     view.backgroundColor = [UIColor orangeColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:view.bounds];
@@ -85,10 +85,10 @@
     CGFloat offsetY = scrollView.contentOffset.y;
     NSLog(@"%f",offsetY);
     if (offsetY > 0) {
-        if (offsetY >= 44) {
+        if (offsetY >= 88) {
             [self setNavigationMove:1];
         } else {
-            [self setNavigationMove:(offsetY / 44)];
+            [self setNavigationMove:(offsetY / 88)];
         }
     }else{
         [self setNavigationMove:0];
@@ -99,7 +99,7 @@
 
 - (void)setNavigationMove:(CGFloat)progress
 {
-    [self.navigationController.navigationBar cyw_setTranslationY:(-44 * progress)];
+    [self.navigationController.navigationBar cyw_setTranslationY:(-88 * progress)];
     [self.navigationController.navigationBar cyw_setNavgationAlpha:(1-progress)];
 }
 

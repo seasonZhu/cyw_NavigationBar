@@ -10,7 +10,7 @@
 
 @interface BaseAnimationViewController ()<CAAnimationDelegate>
 @property (nonatomic,strong)CALayer *layer;
-
+@property (nonatomic, assign) CGPoint lastPosition;
 @end
 
 @implementation BaseAnimationViewController
@@ -26,6 +26,7 @@
     self.layer = [[CALayer alloc] init];
     self.layer.bounds = CGRectMake(0, 0, 30, 30);
     self.layer.position = CGPointMake(200, 100);
+    self.lastPosition = self.layer.position;
     self.layer.contents =(id) [UIImage imageNamed:@"叶子"].CGImage;
     self.layer.anchorPoint = CGPointMake(0.5, 0.6);
     [self.view.layer addSublayer:self.layer];
@@ -44,9 +45,10 @@
 // 移动动画
 -(void)moveToPoint:(CGPoint)point{
     CABasicAnimation *basicAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-    basicAnimation.duration = 5;
-    basicAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(200, 100)];
+    basicAnimation.duration = 2;
+    basicAnimation.fromValue = [NSValue valueWithCGPoint:self.lastPosition];
     basicAnimation.toValue = [NSValue valueWithCGPoint:point];
+    
     basicAnimation.delegate = self;
     // 将终点存储起来
     [basicAnimation setValue:[NSValue valueWithCGPoint:point] forKey:@"animationStop"];
@@ -62,6 +64,7 @@
     [CATransaction setDisableActions:YES];
 //    将图层移动到终点
     self.layer.position = [[anim valueForKey:@"animationStop"] CGPointValue];
+    self.lastPosition = [[anim valueForKey:@"animationStop"] CGPointValue];
      //提交事务
     [CATransaction commit];
 }

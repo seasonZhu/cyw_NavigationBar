@@ -21,10 +21,12 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    LOTAnimationView *animationView =  [LOTAnimationView animationNamed:@"trail_loading"];
+    // 这个LOTAnimationView既可以加载本地json,也可以从网络上获取
+    LOTAnimationView *animationView =  [[LOTAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://cdn.trojx.me/blog_raw/lottie_data_origin.json"]];//[LOTAnimationView animationNamed:@"LottieLogo1"];
+    
 //    animationView.center = self.view.center;
 //    animationView.bounds.size = CGSizeMake(200, 200);
-    animationView.frame = CGRectMake(200, 100, 200, 200);
+    animationView.frame = self.view.frame;
 //    animationView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:animationView];
     [animationView play];

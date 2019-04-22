@@ -40,30 +40,32 @@
 ////    释放图形向下文
 //    CGPathRelease(path);
     
-//    [self drawLine2];
+      //[self drawLine2];
     
 //    绘制矩形
-//    [self drawRectWitchContext:context];
+      //[self drawRectWitchContext:context];
 //    绘制椭圆
-//    [self drawEllipse:context];
+      //[self drawEllipse:context];
 //    绘制弧线
-//    [self drawArc:context];
+      //[self drawArc:context];
     
-//    [self drawCurve];
+      //[self drawCurve];
     
-//    [self drawPic];
+      //[self drawPic];
     
-//    [self drawLinearGradient:context];
+      //[self drawLinearGradient:context];
     
-//    [self drawRadialGradient:context];
+      //[self drawRadialGradient:context];
     
-    [self drawImage2];
+      [self drawImage2];
 }
 
 
 //CGContext封装简单绘图
 -(void)drawLine2{
     CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // CGContex进行绘画的时候, 你可以这么想象 绘笔先到 200,100这个点, 然后画线到 200, 300 然后注意 绘笔回到 200,100 这个点 然后再画线到 400, 300这个点
     
     CGContextMoveToPoint(context, 200, 100);
     CGContextAddLineToPoint(context, 200, 300);
@@ -83,7 +85,8 @@
     CGRect rect = CGRectMake(50, 100, 200, 100);
     
     CGContextAddRect(context, rect);
-    [[UIColor redColor] set];
+    [[UIColor redColor] setStroke];
+    [[UIColor greenColor] setFill];
     
     CGContextDrawPath(context, kCGPathFillStroke);
 }
@@ -91,7 +94,7 @@
 
 //绘制椭圆
 -(void)drawEllipse:(CGContextRef)context{
-    CGContextAddEllipseInRect(context, CGRectMake(100, 100, 200, 200));
+    CGContextAddEllipseInRect(context, CGRectMake(100, 100, 100, 300));
     [[UIColor greenColor] setFill];
     CGContextDrawPath(context, kCGPathFill);
 }
@@ -125,7 +128,7 @@
     UIImage *image = [UIImage imageNamed:@"img02"];
 //    从区域绘制
 //    [image drawInRect:CGRectMake(10, 50, 300, 450)];
-//    从点开始绘制
+//    从点开始绘制 而且没有限制图片的大小,也就是说他会按照其本身的大小进行绘制
     [image drawAtPoint:CGPointMake(100, 200)];
     
 }

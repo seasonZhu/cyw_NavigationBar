@@ -103,8 +103,20 @@
 
 -(void)startAnimation{
     __weak typeof(self)weakSelf = self;
+    
+    /**
+     [UIView animateWithDuration:0.3 animations:^{
+     weakSelf.containView.transform = CGAffineTransformIdentity;
+     }];
+     */
+    
+    // 使用transform进行动画 之前的只有上面的情况, 我加了一个放大系数 然后在competion中又加了一段隐式动画 这样效果和过渡都好一些
     [UIView animateWithDuration:0.3 animations:^{
-        weakSelf.containView.transform = CGAffineTransformIdentity;
+        weakSelf.containView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.containView.transform = CGAffineTransformIdentity;
+        }];
     }];
 }
 

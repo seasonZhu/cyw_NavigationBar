@@ -10,6 +10,7 @@
 #define WIDTH 100
 @interface DrawLayerViewController ()<CALayerDelegate>
 
+@property (nonatomic, weak) CALayer *pictureLayer;
 
 @end
 
@@ -48,12 +49,15 @@
     layer.delegate = self;
     [self.view.layer addSublayer:layer];
     
+    self.pictureLayer = layer;
+    
     //必须调用此方法
     [layer setNeedsDisplay];
     
     
 }
 
+#pragma mark- CALayerDelegate的代理方法
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
     CGContextSaveGState(ctx);
     
@@ -65,6 +69,24 @@
     CGContextDrawImage(ctx, CGRectMake(0, 0, WIDTH, WIDTH), image.CGImage);
     
     CGContextRestoreGState(ctx);
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    // 这个方法是没有效果的
+//    for (CALayer *layer in self.view.layer.sublayers) {
+//        if ([layer isEqual:self.pictureLayer]) {
+//            NSLog(@"我点击的是头像区域");
+//        }
+//    }
+    
+    UITouch *touch = touches.anyObject;
+    CGPoint point = [touch locationInView:self.view];
+    
+    if (CGRectContainsPoint(self.pictureLayer.frame, point)) {
+        NSLog(@"我点击的是头像区域");
+    }
+    
+    
 }
 
 

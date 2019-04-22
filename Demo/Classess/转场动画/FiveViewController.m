@@ -110,7 +110,7 @@
 
 - (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
     //手势开始的时候才需要传入手势过渡代理，如果直接点击pop，应该传入空，否者无法通过点击正常pop
-    return self.pushTransition.intreing ? self.pushTransition  : nil;
+    return self.pushTransition.intreing ? self.pushTransition : nil;
     
 }
 

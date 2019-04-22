@@ -39,16 +39,16 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    QuartzView *view = [[QuartzView alloc] initWithFrame:self.view.bounds];
-//    view.backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:view];
+    QuartzView *view = [[QuartzView alloc] initWithFrame:self.view.bounds];
+    view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view];
 
     
-    UIImage *image = [self drawImageAtImageContext];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.center=CGPointMake(160, 284);
-    
-    [self.view addSubview:imageView];
+//    UIImage *image = [self drawImageAtImageContext];
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+//    imageView.center=CGPointMake(160, 284);
+//    
+//    [self.view addSubview:imageView];
 }
 
 //添加水印

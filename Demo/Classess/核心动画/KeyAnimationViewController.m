@@ -37,6 +37,7 @@
     
     keyAnimation.values = @[value1,value2,value3,value4];
     keyAnimation.duration = 5;
+    keyAnimation.repeatCount = 5;
     [self.layer addAnimation:keyAnimation forKey:@"KCKeyframeAnimation_Position"];
     
     
